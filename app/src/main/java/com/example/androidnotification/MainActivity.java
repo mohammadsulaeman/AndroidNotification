@@ -50,14 +50,18 @@ public class MainActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(edtnama.getText().toString())){
             Toast.makeText(this, "isi pesan anda terlebih dahulu", Toast.LENGTH_SHORT).show();
+        }else
+        {
+            NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(this,CHANNEL_ID)
+                            .setSmallIcon(R.drawable.ic_baseline_message_24)
+                            .setContentTitle("Notification")
+                            .setContentText(edtnama.getText().toString())
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+            notificationManagerCompat.notify(1,builder.build());
+            edtnama.getText().clear();
         }
-        NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(this,CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_baseline_message_24)
-                .setContentTitle("Notification")
-                .setContentText(edtnama.getText().toString())
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-        notificationManagerCompat.notify(1,builder.build());
+
     }
 }
